@@ -1,4 +1,6 @@
-package epam.test.automation.java_exeptions;
+package epam.test.automation.java_exceptions;
+
+import epam.test.automation.java_exceptions.exceptions.FacultyDoesNotHaveGroupsException;
 
 import java.util.List;
 
@@ -19,8 +21,8 @@ public class Faculty {
         this.nameFaculty = nameFaculty;
     }
 
-    public List<Group> getListOfGroups() {
-        if (listOfGroups.isEmpty()) throw new NullPointerException(this + " " + "doesn't have any groups");
+    public List<Group> getListOfGroups() throws FacultyDoesNotHaveGroupsException {
+        if (listOfGroups.isEmpty()) throw new FacultyDoesNotHaveGroupsException(this + " " + "doesn't have any groups");
         return listOfGroups;
     }
 

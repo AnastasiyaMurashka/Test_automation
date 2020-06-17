@@ -1,4 +1,9 @@
-package epam.test.automation.java_exeptions;
+package epam.test.automation.java_exceptions;
+
+import epam.test.automation.java_exceptions.exceptions.FacultyDoesNotHaveGroupsException;
+import epam.test.automation.java_exceptions.exceptions.GroupDoesNotHaveStudentsException;
+import epam.test.automation.java_exceptions.exceptions.StudentDoesNotHaveSubjectsException;
+import epam.test.automation.java_exceptions.exceptions.UniversityDoesNotHaveFacultyException;
 
 import java.util.List;
 
@@ -29,8 +34,9 @@ public class University {
         this.rector = rector;
     }
 
-    public List<Faculty> getFacultyList() {
-        if (facultyList.isEmpty()) throw new NullPointerException("University doesn't have any faculties");
+    public List<Faculty> getFacultyList() throws UniversityDoesNotHaveFacultyException {
+        if (facultyList.isEmpty())
+            throw new UniversityDoesNotHaveFacultyException();
         return facultyList;
     }
 
@@ -67,13 +73,22 @@ public class University {
                 '}';
     }
 
-    public double getGPA(Subject subject, Faculty faculty) {
+    public double getGPA(Subject subject, Faculty faculty) throws GroupDoesNotHaveStudentsException, FacultyDoesNotHaveGroupsException,
+            UniversityDoesNotHaveFacultyException, StudentDoesNotHaveSubjectsException {
         int sumMarks = 0;
         int numberOfMarks = 0;
+        if (facultyList.isEmpty())
+            throw new UniversityDoesNotHaveFacultyException();
         for (Faculty f : facultyList) {
             if (f.equals(faculty)) {
+                if (f.getListOfGroups().isEmpty())
+                    throw new FacultyDoesNotHaveGroupsException(this + " " + "doesn't have any groups");
                 for (Group g : f.getListOfGroups()) {
+                    if (g.getListOfStudents().isEmpty())
+                        throw new GroupDoesNotHaveStudentsException(this + "doesn't have any students");
                     for (Student s : g.getListOfStudents()) {
+                        if (s.getSubjects().isEmpty())
+                            throw new StudentDoesNotHaveSubjectsException(this + "doesn't have any subjects");
                         for (Integer i : s.getMarks().get(subject)) {
                             sumMarks += i;
                             numberOfMarks++;
@@ -85,12 +100,20 @@ public class University {
         return (double) sumMarks / numberOfMarks;
     }
 
-    public double getGPA(Subject subject) {
+    public double getGPA(Subject subject) throws GroupDoesNotHaveStudentsException, FacultyDoesNotHaveGroupsException,
+            UniversityDoesNotHaveFacultyException, StudentDoesNotHaveSubjectsException {
         int sumMarks = 0;
         int numberOfMarks = 0;
+        if (facultyList.isEmpty()) throw new UniversityDoesNotHaveFacultyException();
         for (Faculty f : facultyList) {
+            if (f.getListOfGroups().isEmpty())
+                throw new FacultyDoesNotHaveGroupsException(this + " " + "doesn't have any groups");
             for (Group g : f.getListOfGroups()) {
+                if (g.getListOfStudents().isEmpty())
+                    throw new GroupDoesNotHaveStudentsException(this + "doesn't have any students");
                 for (Student s : g.getListOfStudents()) {
+                    if (s.getSubjects().isEmpty())
+                        throw new StudentDoesNotHaveSubjectsException(this + "doesn't have any subjects");
                     for (Integer i : s.getMarks().get(subject)) {
                         sumMarks += i;
                         numberOfMarks++;

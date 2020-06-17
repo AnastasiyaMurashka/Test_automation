@@ -1,6 +1,6 @@
-package epam.test.automation.java_exeptions;
+package epam.test.automation.java_exceptions;
 
-import epam.test.automation.java_exeptions.exceptions.StudentDoesNotHaveSubjectsException;
+import epam.test.automation.java_exceptions.exceptions.StudentDoesNotHaveSubjectsException;
 
 import java.util.ArrayList;
 import java.util.HashMap;

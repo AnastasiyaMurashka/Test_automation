@@ -1,4 +1,4 @@
-package epam.test.automation.java_exeptions;
+package epam.test.automation.java_exceptions;
 
 public class Subject {
     private String nameOfSubject;

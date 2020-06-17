@@ -1,7 +1,6 @@
-package epam.test.automation.java_exeptions;
+package epam.test.automation.java_exceptions;
 
-import epam.test.automation.java_exeptions.exceptions.MarkIsIncorrectException;
-import epam.test.automation.java_exeptions.exceptions.StudentDoesNotHaveSubjectsException;
+import epam.test.automation.java_exceptions.exceptions.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +24,7 @@ public class Main {
         List<Student> studentsForGroupPs11 = Arrays.asList(new Student(12345, "Egor", "Ivanov",
                         new ArrayList<Subject>(Arrays.asList(math, history, physic, drawing))),
                 new Student(12346, "Andrei", "Korotchenko",
-                        new ArrayList<Subject>()),
+                        new ArrayList<Subject>(Arrays.asList(math, history, physic, drawing))),
                 new Student(12340, "Alesy", "Bygaeva",
                         new ArrayList<Subject>(Arrays.asList(math, history, physic, drawing))),
                 new Student(12341, "Gled", "Boreiko",
@@ -64,55 +63,30 @@ public class Main {
                 new ArrayList<Faculty>(Arrays.asList(pgs, economics)));
 
         try {
-            for (Faculty f : university.getFacultyList()) {
-                for (Group g : f.getListOfGroups()) {
-                    for (Student s : g.getListOfStudents())
-                        s.getSubjects();
-                }
-            }
-        } catch (StudentDoesNotHaveSubjectsException e) {
-            e.printStackTrace();
+            ps11.addMark(12340, math, 6);
+            ps11.addMark(12340, math, 7);
+            ps11.addMark(12340, history, 5);
+            ps21.addMark(12349, math, 6);
+            ps21.addMark(12349, math, 5);
+            gt12.addMark(12356, math, 8);
+            gt22.addMark(12361, math, 5);
+            gt22.addMark(12362, math, 9);
+        } catch (MarkIsIncorrectException | StudentDoesNotHaveSubjectsException e) {
+            System.out.println(e.getMessage());
         }
 
-//        try {
-//            for (Faculty f : university.getFacultyList()) {
-//                for (Group g : f.getListOfGroups()) {
-//                    g.getListOfStudents();
-//                }
-//            }
-//        } catch (NullPointerException e) {
-//            System.out.println(e.getMessage());
-//        }
-//
-//        try {
-//            for (Faculty f : university.getFacultyList()) {
-//                f.getListOfGroups();
-//            }
-//        } catch (NullPointerException e) {
-//            System.out.println(e.getMessage());
-//        }
-//
-//        try {
-//            university.getFacultyList();
-//        } catch (NullPointerException e) {
-//            System.out.println(e.getMessage());
-//        }
-//
-//        try {
-//            ps11.addMark(12340, math, 6);
-//            ps11.addMark(12340, math, 7);
-//            ps11.addMark(12340, history,5);
-//            ps21.addMark(12349, math, 6);
-//            ps21.addMark(12349, math, 5);
-//            gt12.addMark(12356, math, 8);
-//            gt22.addMark(12361, math, 5);
-//            gt22.addMark(12362, math, 9);
-//        } catch (MarkIsIncorrectException e) {
-//            e.printStackTrace();
-//        }
-//
-//        ps11.getGPA(12340);
-//        university.getGPA(math, pgs);
-//        university.getGPA(math);
+        try {
+            ps11.getGPA(12340);
+        } catch (StudentDoesNotHaveSubjectsException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            university.getGPA(math, pgs);
+            university.getGPA(math);
+        } catch (UniversityDoesNotHaveFacultyException | FacultyDoesNotHaveGroupsException |
+                GroupDoesNotHaveStudentsException | StudentDoesNotHaveSubjectsException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

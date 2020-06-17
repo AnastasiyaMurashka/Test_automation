@@ -1,7 +1,8 @@
-package epam.test.automation.java_exeptions;
+package epam.test.automation.java_exceptions;
 
-import epam.test.automation.java_exeptions.exceptions.MarkIsIncorrectException;
-import epam.test.automation.java_exeptions.exceptions.StudentDoesNotHaveSubjectsException;
+import epam.test.automation.java_exceptions.exceptions.GroupDoesNotHaveStudentsException;
+import epam.test.automation.java_exceptions.exceptions.MarkIsIncorrectException;
+import epam.test.automation.java_exceptions.exceptions.StudentDoesNotHaveSubjectsException;
 
 import java.util.Set;
 
@@ -22,8 +23,8 @@ public class Group {
         this.nameOfGroup = nameOfGroup;
     }
 
-    public Set<Student> getListOfStudents() {
-        if (listOfStudents.isEmpty()) throw new NullPointerException(this + "doesn't have any students");
+    public Set<Student> getListOfStudents() throws GroupDoesNotHaveStudentsException {
+        if (listOfStudents.isEmpty()) throw new GroupDoesNotHaveStudentsException(this + "doesn't have any students");
         return listOfStudents;
     }
 
@@ -57,12 +58,14 @@ public class Group {
                 '}';
     }
 
-    public void addMark(long id, Subject subject, Integer mark) throws MarkIsIncorrectException {
+    public void addMark(long id, Subject subject, Integer mark) throws MarkIsIncorrectException, StudentDoesNotHaveSubjectsException {
         if (mark > 10 || mark < 0) {
             throw new MarkIsIncorrectException("Marks should be 0-10");
         } else {
             for (Student s : listOfStudents) {
                 if (s.getId() == id) {
+                    if (s.getSubjects().isEmpty())
+                        throw new StudentDoesNotHaveSubjectsException(this + "doesn't have any subjects");
                     s.getMarks().get(subject).add(mark);
                 }
             }
