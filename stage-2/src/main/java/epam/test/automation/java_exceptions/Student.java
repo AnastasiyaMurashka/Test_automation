@@ -1,5 +1,7 @@
 package epam.test.automation.java_exeptions;
 
+import epam.test.automation.java_exeptions.exceptions.StudentDoesNotHaveSubjectsException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,8 +57,8 @@ public class Student implements Comparable<Student> {
         this.marks = marks;
     }
 
-    public List<Subject> getSubjects() {
-        if (subjects.isEmpty()) throw new NullPointerException(this + "doesn't have any subjects");
+    public List<Subject> getSubjects() throws StudentDoesNotHaveSubjectsException {
+        if (subjects.isEmpty()) throw new StudentDoesNotHaveSubjectsException(this + "doesn't have any subjects");
         return subjects;
     }
 

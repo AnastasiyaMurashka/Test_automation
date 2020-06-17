@@ -1,5 +1,8 @@
 package epam.test.automation.java_exeptions;
 
+import epam.test.automation.java_exeptions.exceptions.MarkIsIncorrectException;
+import epam.test.automation.java_exeptions.exceptions.StudentDoesNotHaveSubjectsException;
+
 import java.util.Set;
 
 public class Group {
@@ -54,9 +57,9 @@ public class Group {
                 '}';
     }
 
-    public void addMark(long id, Subject subject, Integer mark) {
+    public void addMark(long id, Subject subject, Integer mark) throws MarkIsIncorrectException {
         if (mark > 10 || mark < 0) {
-            throw new IllegalArgumentException("Marks should be 0-10");
+            throw new MarkIsIncorrectException("Marks should be 0-10");
         } else {
             for (Student s : listOfStudents) {
                 if (s.getId() == id) {
@@ -66,11 +69,13 @@ public class Group {
         }
     }
 
-    public double getGPA(long id) {
+    public double getGPA(long id) throws StudentDoesNotHaveSubjectsException {
         int sum = 0;
         int numberOfMarks = 0;
         for (Student s : listOfStudents) {
             if (s.getId() == id) {
+                if (s.getSubjects().isEmpty())
+                    throw new StudentDoesNotHaveSubjectsException(this + "doesn't have any subjects");
                 for (Subject sub : s.getSubjects()) {
                     for (Integer i : s.getMarks().get(sub)) {
                         sum += i;
