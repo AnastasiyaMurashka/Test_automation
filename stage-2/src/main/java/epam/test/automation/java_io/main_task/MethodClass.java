@@ -6,26 +6,24 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MethodClass {
-    private MethodClass() {
-    }
 
     public static void createFiles(String path) {
         File newTreeFile = new File("data" + File.separator + "treeFile.txt");
         File mainFile = new File(path);
-        try (FileWriter fw = new FileWriter(newTreeFile, false)) {
+        try (FileWriter fileWriter = new FileWriter(newTreeFile, false)) {
             if (mainFile.isDirectory()) {
-                fw.write(mainFile.getName());
-                fw.write('\n');
+                fileWriter.write(mainFile.getName());
+                fileWriter.write('\n');
                 int numberOfFiles = 0;
                 List<File> fileList = Arrays.asList(mainFile.listFiles());
                 for (File file : fileList) {
                     if (file.isDirectory()) {
-                        fw.write("|-----" + file.getName() + ":");
-                        fw.write('\n');
+                        fileWriter.write("|-----" + file.getName() + ":");
+                        fileWriter.write('\n');
                         List<File> listOfFiles = Arrays.asList(file.listFiles());
                         for (File f : listOfFiles) {
-                            fw.write("- " + ++numberOfFiles + ". " + f.getName());
-                            fw.write('\n');
+                            fileWriter.write("- " + ++numberOfFiles + ". " + f.getName());
+                            fileWriter.write('\n');
                         }
                         numberOfFiles = 0;
                     }
@@ -42,8 +40,8 @@ public class MethodClass {
         int numberOfDirectory = 0;
         int numberOfFiles = 0;
         int sumLengthOfFileNames = 0;
-        try (FileReader fr = new FileReader(treeFile)) {
-            Scanner scanner = new Scanner(fr);
+        try (FileReader fileReader = new FileReader(treeFile)) {
+            Scanner scanner = new Scanner(fileReader);
             while (scanner.hasNextLine()) {
                 line = scanner.nextLine();
                 if (line.startsWith("|")) {
