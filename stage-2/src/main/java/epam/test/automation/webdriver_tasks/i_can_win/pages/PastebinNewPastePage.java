@@ -10,13 +10,13 @@ public class PastebinNewPastePage {
     private WebDriver driver;
 
 
-    public PastebinNewPastePage(WebDriver driver){
-        this.driver=driver;
-        PageFactory.initElements(driver,this);
+    public PastebinNewPastePage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
-    public boolean checkSuccessfulCreateNewPaste(){
-        new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(By.id("success")));
-        return (driver.findElements(By.id("success")).size()>0);
+    public boolean checkSuccessfulCreateNewPaste() {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.id("success")));
+        return (driver.findElements(By.id("success")).size() > 0);
     }
 }

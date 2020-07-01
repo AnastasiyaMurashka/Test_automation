@@ -14,6 +14,7 @@ public class TestForTaskICanWin {
     @BeforeMethod(alwaysRun = true)
     public void browserSetup() {
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
     }
 
     @Test(description = "This test checks successful creation of the new Paste")
@@ -23,7 +24,6 @@ public class TestForTaskICanWin {
                 .setPasteExpiration()
                 .setPasteName()
                 .createPastebinNewPastePage().checkSuccessfulCreateNewPaste());
-
     }
 
     @AfterMethod(alwaysRun = true)

@@ -15,7 +15,7 @@ public class HomePagePastebin {
     private static final String CODE_TEXT = "git config --global user.name  \"New Sheriff in Town\"\n" +
             "git reset $(git commit-tree HEAD^{tree} -m \"Legacy code\")\n" +
             "git push origin master --force";
-    private static final String SYNTAX_HIGHLIGHTING ="Bash";
+    private static final String SYNTAX_HIGHLIGHTING = "Bash";
     private static final String PASTE_EXPIRATION = "10 Minutes";
     private static final String PASTE_NAME = "how to gain dominance among developer";
 
@@ -36,7 +36,7 @@ public class HomePagePastebin {
 
     public HomePagePastebin(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
 
     public HomePagePastebin openPage() {
@@ -49,13 +49,13 @@ public class HomePagePastebin {
         return this;
     }
 
-    public HomePagePastebin setSyntaxHighlighting(){
+    public HomePagePastebin setSyntaxHighlighting() {
         Select select = new Select(pasteSyntaxHighlighting);
         select.selectByVisibleText(SYNTAX_HIGHLIGHTING);
         return this;
     }
 
-    public HomePagePastebin setExpiration(){
+    public HomePagePastebin setExpiration() {
         Select select = new Select(pasteExpirationSetup);
         select.selectByVisibleText(PASTE_EXPIRATION);
         return this;
