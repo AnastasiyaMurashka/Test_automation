@@ -11,6 +11,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class PageWithNewPaste {
     private WebDriver driver;
 
+    private By syntaxHighlightingOfNewPaste = By.xpath("//a[text()='Bash']");
+    private By titleOfNewPaste = By.xpath("//*[@class='paste_box_line1']");
+    private By textFromNewPaste = By.id("paste_code");
+
     @FindBy(xpath = "//a[text()='Bash']")
     private WebElement buttonSyntaxHighlighting;
 
@@ -27,19 +31,19 @@ public class PageWithNewPaste {
 
     public String getTextFromSyntaxHighlightingButton() {
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[text()='Bash']")));
+                .until(ExpectedConditions.presenceOfElementLocated(syntaxHighlightingOfNewPaste));
         return buttonSyntaxHighlighting.getText();
     }
 
     public String getTitle() {
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='paste_box_line1']")));
+                .until(ExpectedConditions.presenceOfElementLocated(titleOfNewPaste));
         return title.getText();
     }
 
     public String getCodeFromNewPage() {
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.id("paste_code")));
+                .until(ExpectedConditions.presenceOfElementLocated(textFromNewPaste));
         return pasteCode.getText();
     }
 }

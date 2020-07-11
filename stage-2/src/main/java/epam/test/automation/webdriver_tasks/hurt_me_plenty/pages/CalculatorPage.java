@@ -17,127 +17,116 @@ public class CalculatorPage extends AbstractPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//md-tab-item/*[@title='Compute Engine']")
-    WebElement computerEngine;
+    @FindBy(id = "input_59")
+    WebElement numberOfInstancesInput;
 
-    @FindBy(id = "input_58")
-    WebElement numberOfInstances;
-
-    @FindBy(id = "select_70")
-    WebElement operatingSystem;
+    @FindBy(id = "select_71")
+    WebElement operatingSystemDropDownList;
 
     @FindBy(xpath = "//md-option[@value='free']/div[@class='md-text']")
-    WebElement valueOfOperatingSystem;
+    WebElement valueOfOperatingSystemButton;
 
-    @FindBy(id = "select_74")
-    WebElement machineClass;
+    @FindBy(id = "select_75")
+    WebElement machineClassDropDownList;
 
     @FindBy(xpath = "//div[@class='md-select-menu-container md-active md-clickable']//div[text()='Regular']")
-    WebElement valueMachineClass;
+    WebElement valueMachineClassButton;
 
-    @FindBy(id = "select_83")
-    WebElement machineType;
+    @FindBy(id = "select_84")
+    WebElement machineTypeDropDownList;
 
     @FindBy(css = "md-option[value='CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8'] div")
-    WebElement valueOfMachineType;
+    WebElement valueOfMachineTypeButton;
 
     @FindBy(xpath = "//md-input-container//md-checkbox[@aria-label='Add GPUs']")
     WebElement addGroupCheckBox;
 
-    @FindBy(id = "select_337")
-    WebElement numberOfGroup;
+    @FindBy(id = "select_338")
+    WebElement numberOfGroupDropDownList;
 
     @FindBy(xpath = "//div[@class='md-select-menu-container md-active md-clickable']//md-option[@value='1']")
-    WebElement valueOfNumberOfGroup;
+    WebElement valueOfNumberOfGroupButton;
 
-    @FindBy(xpath = "//md-select[@id='select_339']//span[@class='md-select-icon']")
-    WebElement gpuType;
+    @FindBy(xpath = "//md-select[@id='select_340']//span[@class='md-select-icon']")
+    WebElement gpuTypeDropDownList;
 
     @FindBy(xpath = "//md-option[@value='NVIDIA_TESLA_V100']")
-    WebElement valueOfGPUType;
+    WebElement valueOfGPUTypeButton;
 
-    @FindBy(xpath = "//md-select[@id='select_170']//span[@class='md-select-icon']")
-    WebElement localSSD;
+    @FindBy(xpath = "//md-select[@id='select_171']//span[@class='md-select-icon']")
+    WebElement localSsdDropDownList;
 
-    @FindBy(xpath = "//div[@id='select_container_171']//md-option[@value='2']")
-    WebElement valueOfLocalSSD;
+    @FindBy(xpath = "//div[@id='select_container_172']//md-option[@value='2']")
+    WebElement valueOfLocalSsdButton;
 
-    @FindBy(xpath = "//md-select[@id='select_85']//span[@class='md-select-icon']")
-    WebElement datacenterLocation;
+    @FindBy(xpath = "//md-select[@id='select_86']//span[@class='md-select-icon']")
+    WebElement datacenterLocationDropDownList;
 
-    @FindBy(xpath = "//div[@id='select_container_86']//md-option[@value='europe-west3']")
-    WebElement valueOfDatacenterLocation;
+    @FindBy(xpath = "//div[@id='select_container_87']//md-option[@value='europe-west3']")
+    WebElement valueOfDatacenterLocationButton;
 
-    @FindBy(xpath = "//md-select[@id='select_92']//span[@class='md-select-icon']")
-    WebElement commitedUsage;
+    @FindBy(xpath = "//md-select[@id='select_93']//span[@class='md-select-icon']")
+    WebElement commitedUsageDropDownList;
 
-    @FindBy(xpath = "//*[@id='select_option_90']/div[@class='md-text']")
-    WebElement valueOfCommitedUsage;
-
+    @FindBy(xpath = "//*[@id='select_option_91']/div[@class='md-text']")
+    WebElement valueOfCommitedUsageButton;
 
     @FindBy(xpath = "//*[@id='mainForm']/descendant::button[@class='md-raised md-primary cpc-button md-button md-ink-ripple']")
-    WebElement buttonAddToEstimate;
+    WebElement addToEstimateButton;
 
-
-    @FindBy(xpath = "//div[@class='md-list-item-text ng-binding' and contains(.,'regular')]")
-    WebElement estimateVMType;
-
-    @FindBy(xpath = "//div[@class='md-list-item-text ng-binding' and contains(.,'Instance type:')]")
-    WebElement estimateInstanceType;
-
-
-    @FindBy(xpath = "//div[@class='md-list-item-text ng-binding' and contains(.,'Region:')]")
-    WebElement estimateRegion;
-
-    @FindBy(xpath = "//div[@class='md-list-item-text ng-binding' and contains(.,'Total available')]")
-    WebElement estimateLocalSSD;
-
-    @FindBy(xpath = "//div[@class='md-list-item-text ng-binding' and contains(.,'Commitment')]")
-    WebElement estimateCommitmentTerm;
-
-    @FindBy(xpath = "//h2[@class='md-title']/b[@class='ng-binding']")
-    WebElement estimateCost;
+    private static final By VALUE_OF_VM_TYPE_FROM_ESTIMATE =
+            By.xpath("//div[@class='md-list-item-text ng-binding' and contains(.,'regular')]");
+    private static final By VALUE_OF_INSTANCE_TYPE_FROM_ESTIMATE =
+            By.xpath("//div[@class='md-list-item-text ng-binding' and contains(.,'Instance type:')]");
+    private static final By VALUE_OF_REGION_FROM_ESTIMATE =
+            By.xpath("//div[@class='md-list-item-text ng-binding' and contains(.,'Region:')]");
+    private static final By VALUE_OF_LOCAL_SSD_FROM_ESTIMATE =
+            By.xpath("//div[@class='md-list-item-text ng-binding' and contains(.,'Total available')]");
+    private static final By VALUE_OF_COMMITMENT_TERM_FROM_ESTIMATE =
+            By.xpath("//div[@class='md-list-item-text ng-binding' and contains(.,'Commitment')]");
+    private static final By COST_FROM_ESTIMATE = By.xpath("//h2[@class='md-title']/b[@class='ng-binding']");
+    private static final By FRAME = By.xpath("//*[@id='cloud-site']/devsite-iframe/iframe");
+    private static final By COMPUTER_ENGINE_BUTTON = By.xpath("//md-tab-item/*[@title='Compute Engine']");
 
     public CalculatorPage switchToComputerEngine() {
         new WebDriverWait(driver, 20)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='cloud-site']/devsite-iframe/iframe")));
-
+                .until(ExpectedConditions.presenceOfElementLocated(FRAME));
         driver.switchTo().frame(0);
         driver.switchTo().frame("myFrame");
         new WebDriverWait(driver, 20)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-tab-item/*[@title='Compute Engine']")));
-        computerEngine.click();
+                .until(ExpectedConditions.presenceOfElementLocated(COMPUTER_ENGINE_BUTTON));
+        driver.findElement(COMPUTER_ENGINE_BUTTON).click();
         return this;
     }
 
     public CalculatorPage setNumberOfInstances() {
         new WebDriverWait(driver, 20)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//md-tab-item/*[@title='Compute Engine']")));
-        numberOfInstances.sendKeys("4");
+                .until(ExpectedConditions.presenceOfElementLocated(COMPUTER_ENGINE_BUTTON));
+        numberOfInstancesInput.sendKeys("4");
         return this;
     }
 
     public CalculatorPage setOperatingSystem() {
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(operatingSystem));
-        executor.executeScript("arguments[0].click()", operatingSystem);
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(valueOfOperatingSystem));
-        executor.executeScript("arguments[0].click()", valueOfOperatingSystem);
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(operatingSystemDropDownList));
+        executor.executeScript("arguments[0].click()", operatingSystemDropDownList);
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(valueOfOperatingSystemButton));
+        executor.executeScript("arguments[0].click()", valueOfOperatingSystemButton);
         return this;
     }
 
     public CalculatorPage setMachineClass() {
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(machineClass));
-        executor.executeScript("arguments[0].click()", machineClass);
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(valueMachineClass));
-        executor.executeScript("arguments[0].click()", valueMachineClass);
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(machineClassDropDownList));
+        executor.executeScript("arguments[0].click()", machineClassDropDownList);
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(valueMachineClassButton));
+        executor.executeScript("arguments[0].click()", valueMachineClassButton);
         return this;
     }
 
     public CalculatorPage setMachineType() {
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(machineType));
-        executor.executeScript("arguments[0].click()", machineType);
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(valueOfMachineType));
-        executor.executeScript("arguments[0].click()", valueOfMachineType);
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(machineTypeDropDownList));
+        executor.executeScript("arguments[0].click()", machineTypeDropDownList);
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(valueOfMachineTypeButton));
+        executor.executeScript("arguments[0].click()", valueOfMachineTypeButton);
         return this;
     }
 
@@ -148,93 +137,90 @@ public class CalculatorPage extends AbstractPage {
     }
 
     public CalculatorPage setNumberOfGroup() {
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(numberOfGroup));
-        executor.executeScript("arguments[0].click()", numberOfGroup);
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(valueOfNumberOfGroup));
-        executor.executeScript("arguments[0].click()", valueOfNumberOfGroup);
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(numberOfGroupDropDownList));
+        executor.executeScript("arguments[0].click()", numberOfGroupDropDownList);
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(valueOfNumberOfGroupButton));
+        executor.executeScript("arguments[0].click()", valueOfNumberOfGroupButton);
         return this;
     }
 
     public CalculatorPage setGPUType() {
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(gpuType));
-        executor.executeScript("arguments[0].click()", gpuType);
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(valueOfGPUType));
-        executor.executeScript("arguments[0].click()", valueOfGPUType);
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(gpuTypeDropDownList));
+        executor.executeScript("arguments[0].click()", gpuTypeDropDownList);
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(valueOfGPUTypeButton));
+        executor.executeScript("arguments[0].click()", valueOfGPUTypeButton);
         return this;
     }
 
     public CalculatorPage setLocalSSD() {
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(localSSD));
-        executor.executeScript("arguments[0].click()", localSSD);
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(valueOfLocalSSD));
-        executor.executeScript("arguments[0].click()", valueOfLocalSSD);
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(localSsdDropDownList));
+        executor.executeScript("arguments[0].click()", localSsdDropDownList);
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(valueOfLocalSsdButton));
+        executor.executeScript("arguments[0].click()", valueOfLocalSsdButton);
         return this;
     }
 
     public CalculatorPage setDatacenterLocation() {
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(datacenterLocation));
-        executor.executeScript("arguments[0].click()", datacenterLocation);
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(valueOfDatacenterLocation));
-        executor.executeScript("arguments[0].click()", valueOfDatacenterLocation);
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(datacenterLocationDropDownList));
+        executor.executeScript("arguments[0].click()", datacenterLocationDropDownList);
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(valueOfDatacenterLocationButton));
+        executor.executeScript("arguments[0].click()", valueOfDatacenterLocationButton);
         return this;
     }
 
     public CalculatorPage setCommitedUsage() {
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(commitedUsage));
-        executor.executeScript("arguments[0].click()", commitedUsage);
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(valueOfDatacenterLocation));
-        executor.executeScript("arguments[0].click()", valueOfCommitedUsage);
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(commitedUsageDropDownList));
+        executor.executeScript("arguments[0].click()", commitedUsageDropDownList);
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(valueOfDatacenterLocationButton));
+        executor.executeScript("arguments[0].click()", valueOfCommitedUsageButton);
         return this;
     }
 
-
     public CalculatorPage clickAddToEstimate() {
-
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(buttonAddToEstimate));
-        executor.executeScript("arguments[0].click()", buttonAddToEstimate);
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(addToEstimateButton));
+        executor.executeScript("arguments[0].click()", addToEstimateButton);
         return this;
     }
 
     public String getValueOfVMMachine() {
-
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated
-                        (By.xpath("//div[@class='md-list-item-text ng-binding' and contains(.,'regular')]")));
-        return estimateVMType.getText();
+                        (VALUE_OF_VM_TYPE_FROM_ESTIMATE));
+        return driver.findElement(VALUE_OF_VM_TYPE_FROM_ESTIMATE).getText();
     }
 
     public String getValueInstanceType() {
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated
-                        (By.xpath("//div[@class='md-list-item-text ng-binding' and contains(.,'Instance type:')]")));
-        return estimateInstanceType.getText();
+                        (VALUE_OF_INSTANCE_TYPE_FROM_ESTIMATE));
+        return driver.findElement(VALUE_OF_INSTANCE_TYPE_FROM_ESTIMATE).getText();
     }
 
     public String getValueRegion() {
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated
-                        (By.xpath("//div[@class='md-list-item-text ng-binding' and contains(.,'Region:')]")));
-        return estimateRegion.getText();
+                        (VALUE_OF_REGION_FROM_ESTIMATE));
+        return driver.findElement(VALUE_OF_REGION_FROM_ESTIMATE).getText();
     }
 
     public String getValueLocalSSD() {
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated
-                        (By.xpath("//div[@class='md-list-item-text ng-binding' and contains(.,'Total available')]")));
-        return estimateLocalSSD.getText();
+                        (VALUE_OF_LOCAL_SSD_FROM_ESTIMATE));
+        return driver.findElement(VALUE_OF_LOCAL_SSD_FROM_ESTIMATE).getText();
     }
 
     public String getCommitmentTerm() {
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated
-                        (By.xpath("//div[@class='md-list-item-text ng-binding' and contains(.,'Commitment')]")));
-        return estimateCommitmentTerm.getText();
+                        (VALUE_OF_COMMITMENT_TERM_FROM_ESTIMATE));
+        return driver.findElement(VALUE_OF_COMMITMENT_TERM_FROM_ESTIMATE).getText();
     }
 
     public String getCost() {
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated
-                        (By.xpath("//h2[@class='md-title']/b[@class='ng-binding']")));
-        return estimateCost.getText();
+                        (COST_FROM_ESTIMATE));
+        return driver.findElement(COST_FROM_ESTIMATE).getText();
     }
 }

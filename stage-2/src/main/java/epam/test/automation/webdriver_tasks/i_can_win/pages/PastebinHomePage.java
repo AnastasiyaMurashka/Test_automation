@@ -19,20 +19,21 @@ public class PastebinHomePage {
     private WebDriver driver;
 
     @FindBy(id = "paste_code")
-    private WebElement fieldForPasteText;
+    private WebElement pasteTextArea;
 
     @FindBy(name = "paste_expire_date")
-    private WebElement pasteExpirationSetup;
+    private WebElement pasteExpirationSpan;
 
     @FindBy(name = "paste_name")
-    private WebElement pasteNameSetup;
+    private WebElement pasteNameInput;
 
     @FindBy(id = "submit")
-    private WebElement buttonCreatePaste;
+    private WebElement createNewPasteButton;
 
     public PastebinHomePage(WebDriver driver) {
         this.driver = driver;
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         PageFactory.initElements(driver, this);
     }
 
@@ -42,23 +43,23 @@ public class PastebinHomePage {
     }
 
     public PastebinHomePage inputCode() {
-        fieldForPasteText.sendKeys(CODE_TEXT);
+        pasteTextArea.sendKeys(CODE_TEXT);
         return this;
     }
 
     public PastebinHomePage setPasteExpiration() {
-        Select select = new Select(pasteExpirationSetup);
+        Select select = new Select(pasteExpirationSpan);
         select.selectByVisibleText(PASTE_EXPIRATION);
         return this;
     }
 
     public PastebinHomePage setPasteName() {
-        pasteNameSetup.sendKeys(PASTE_NAME);
+        pasteNameInput.sendKeys(PASTE_NAME);
         return this;
     }
 
     public PastebinNewPastePage createPastebinNewPastePage() {
-        buttonCreatePaste.click();
+        createNewPasteButton.click();
         new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.id("success")));
         return new PastebinNewPastePage(driver);
     }

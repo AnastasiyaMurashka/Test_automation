@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class PastebinNewPastePage {
     private WebDriver driver;
 
-
     public PastebinNewPastePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);

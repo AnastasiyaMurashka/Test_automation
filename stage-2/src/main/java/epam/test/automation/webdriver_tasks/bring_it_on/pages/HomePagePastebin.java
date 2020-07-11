@@ -20,19 +20,19 @@ public class HomePagePastebin {
     private static final String PASTE_NAME = "how to gain dominance among developer";
 
     @FindBy(name = "paste_format")
-    private WebElement pasteSyntaxHighlighting;
+    private WebElement pasteSyntaxHighlightingSpan;
 
     @FindBy(id = "paste_code")
-    private WebElement fieldForPasteText;
+    private WebElement pasteTextArea;
 
     @FindBy(name = "paste_expire_date")
-    private WebElement pasteExpirationSetup;
+    private WebElement pasteExpirationSpan;
 
     @FindBy(name = "paste_name")
-    private WebElement pasteNameSetup;
+    private WebElement pasteNameInput;
 
     @FindBy(id = "submit")
-    private WebElement buttonCreatePaste;
+    private WebElement createPasteButton;
 
     public HomePagePastebin(WebDriver driver) {
         this.driver = driver;
@@ -45,29 +45,29 @@ public class HomePagePastebin {
     }
 
     public HomePagePastebin inputCode() {
-        fieldForPasteText.sendKeys(CODE_TEXT);
+        pasteTextArea.sendKeys(CODE_TEXT);
         return this;
     }
 
     public HomePagePastebin setSyntaxHighlighting() {
-        Select select = new Select(pasteSyntaxHighlighting);
+        Select select = new Select(pasteSyntaxHighlightingSpan);
         select.selectByVisibleText(SYNTAX_HIGHLIGHTING);
         return this;
     }
 
     public HomePagePastebin setExpiration() {
-        Select select = new Select(pasteExpirationSetup);
+        Select select = new Select(pasteExpirationSpan);
         select.selectByVisibleText(PASTE_EXPIRATION);
         return this;
     }
 
     public HomePagePastebin setPasteName() {
-        pasteNameSetup.sendKeys(PASTE_NAME);
+        pasteNameInput.sendKeys(PASTE_NAME);
         return this;
     }
 
     public PageWithNewPaste createPastebinNewPastePage() {
-        buttonCreatePaste.click();
+        createPasteButton.click();
         new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.id("success")));
         return new PageWithNewPaste(driver);
     }

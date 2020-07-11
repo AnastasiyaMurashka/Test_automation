@@ -4,26 +4,21 @@ import epam.test.automation.webdriver_tasks.hurt_me_plenty.pages.CalculatorPage;
 import epam.test.automation.webdriver_tasks.hurt_me_plenty.pages.HomePageCloudGoogle;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertTrue;
+
+import org.testng.annotations.*;
+import org.testng.asserts.SoftAssert;
 
 public class TestHurtMePlenty {
     private WebDriver driver;
+    private CalculatorPage calculatorPage;
 
-
-    @BeforeMethod(alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void browserSetup() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-    }
-
-    @Test(priority = 1)
-    public void testChecksCorrectFieldsFilling() {
-        CalculatorPage calculatorPage;
-        HomePageCloudGoogle homePageCloudGoogle = new HomePageCloudGoogle(driver);
-        calculatorPage = homePageCloudGoogle.openHomePage()
+        calculatorPage = new HomePageCloudGoogle(driver).openHomePage()
                 .startSearch()
                 .inputSearchEnquiry()
                 .pickRightResult()
@@ -39,15 +34,26 @@ public class TestHurtMePlenty {
                 .setDatacenterLocation()
                 .setCommitedUsage()
                 .clickAddToEstimate();
-        Assert.assertTrue(calculatorPage.getValueOfVMMachine().contains("regular"));
-        Assert.assertTrue(calculatorPage.getValueInstanceType().contains("n1-standard-8"));
-        Assert.assertTrue(calculatorPage.getValueRegion().contains("Frankfurt"));
-        Assert.assertTrue(calculatorPage.getValueLocalSSD().contains("2x375"));
-        Assert.assertTrue(calculatorPage.getCommitmentTerm().contains("1 Year"));
-        Assert.assertTrue(calculatorPage.getCost().contains("1,082.77"));
     }
 
-    @AfterMethod(alwaysRun = true)
+    @Test
+    public void checkCorrectFieldsFilling() {
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(calculatorPage.getValueOfVMMachine().contains("regular"), "value of VM is incorrectly set");
+        softAssert.assertTrue(calculatorPage.getValueInstanceType().contains("n1-standard-8"),
+                "value of instance type is incorrectly set");
+        softAssert.assertTrue(calculatorPage.getValueRegion().contains("Frankfurt"),
+                "value of region is incorrectly set");
+        assertTrue(calculatorPage.getValueLocalSSD().contains("2x375"),
+                "value of local SSD is incorrectly set");
+        softAssert.assertTrue(calculatorPage.getCommitmentTerm().contains("1 Year"),
+                "value of commitment term is incorrectly set");
+        softAssert.assertTrue(calculatorPage.getCost().contains("1,082.77"),
+                "cost from estimate is calculate incorrectly");
+        softAssert.assertAll();
+    }
+
+    @AfterClass(alwaysRun = true)
     public void quit() {
         driver.quit();
     }

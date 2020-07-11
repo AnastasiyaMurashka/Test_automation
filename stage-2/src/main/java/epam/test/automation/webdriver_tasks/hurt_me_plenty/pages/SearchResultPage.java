@@ -16,13 +16,13 @@ public class SearchResultPage extends AbstractPage {
     }
 
     @FindBy(xpath = "//div[@class='gs-title']//b[text()='Google Cloud Platform Pricing Calculator']")
-    WebElement rightResult;
+    WebElement googleCloudPlatformPricingCalculatorLink;
 
     public CalculatorPage pickRightResult() {
         new WebDriverWait(driver, 20)
                 .until(ExpectedConditions.presenceOfElementLocated
                         (By.xpath("//div[@class='gs-title']//b[text()='Google Cloud Platform Pricing Calculator']")));
-        rightResult.click();
+        googleCloudPlatformPricingCalculatorLink.click();
         return new CalculatorPage(driver);
     }
 }

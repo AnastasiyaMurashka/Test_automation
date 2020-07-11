@@ -15,7 +15,7 @@ public class HomePageCloudGoogle extends AbstractPage {
     WebElement searchButton;
 
     @FindBy(name = "q")
-    WebElement searchLine;
+    WebElement searchLineInput;
 
     public HomePageCloudGoogle(WebDriver driver) {
         super(driver);
@@ -35,7 +35,7 @@ public class HomePageCloudGoogle extends AbstractPage {
     }
 
     public SearchResultPage inputSearchEnquiry() {
-        searchLine.sendKeys(SEARCH_ENQUIRY + '\n');
+        searchLineInput.sendKeys(SEARCH_ENQUIRY + '\n');
         return new SearchResultPage(driver);
     }
 }

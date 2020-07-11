@@ -19,58 +19,58 @@ public class CalculatorPage extends AbstractPage {
     @FindBy(xpath = "//md-tab-item/*[@title='Compute Engine']")
     WebElement computerEngine;
 
-    @FindBy(id = "input_58")
+    @FindBy(id = "input_59")
     WebElement numberOfInstances;
 
-    @FindBy(id = "select_70")
+    @FindBy(id = "select_71")
     WebElement operatingSystem;
 
     @FindBy(xpath = "//md-option[@value='free']/div[@class='md-text']")
     WebElement valueOfOperatingSystem;
 
-    @FindBy(id = "select_74")
+    @FindBy(id = "select_75")
     WebElement machineClass;
 
     @FindBy(xpath = "//div[@class='md-select-menu-container md-active md-clickable']//div[text()='Regular']")
     WebElement valueMachineClass;
 
-    @FindBy(id = "select_83")
+    @FindBy(id = "select_84")
     WebElement machineType;
 
-    @FindBy(css = "md-option[value='CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8'] div")
+    @FindBy(xpath = "//md-option[@value='CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8']//div[@class='md-text ng-binding']")
     WebElement valueOfMachineType;
 
     @FindBy(xpath = "//md-input-container//md-checkbox[@aria-label='Add GPUs']")
     WebElement addGroupCheckBox;
 
-    @FindBy(id = "select_337")
+    @FindBy(id = "select_338")
     WebElement numberOfGroup;
 
     @FindBy(xpath = "//div[@class='md-select-menu-container md-active md-clickable']//md-option[@value='1']")
     WebElement valueOfNumberOfGroup;
 
-    @FindBy(xpath = "//md-select[@id='select_339']//span[@class='md-select-icon']")
+    @FindBy(xpath = "//md-select[@id='select_340']//span[@class='md-select-icon']")
     WebElement gpuType;
 
     @FindBy(xpath = "//md-option[@value='NVIDIA_TESLA_V100']")
     WebElement valueOfGPUType;
 
-    @FindBy(xpath = "//md-select[@id='select_170']//span[@class='md-select-icon']")
+    @FindBy(xpath = "//md-select[@id='select_171']//span[@class='md-select-icon']")
     WebElement localSSD;
 
-    @FindBy(xpath = "//div[@id='select_container_171']//md-option[@value='2']")
+    @FindBy(xpath = "//div[@id='select_container_172']//md-option[@value='2']")
     WebElement valueOfLocalSSD;
 
-    @FindBy(xpath = "//md-select[@id='select_85']//span[@class='md-select-icon']")
+    @FindBy(xpath = "//md-select[@id='select_86']//span[@class='md-select-icon']")
     WebElement datacenterLocation;
 
-    @FindBy(xpath = "//div[@id='select_container_86']//md-option[@value='europe-west3']")
+    @FindBy(xpath = "//div[@id='select_container_87']//md-option[@value='europe-west3']")
     WebElement valueOfDatacenterLocation;
 
-    @FindBy(xpath = "//md-select[@id='select_92']//span[@class='md-select-icon']")
+    @FindBy(xpath = "//md-select[@id='select_93']//span[@class='md-select-icon']")
     WebElement commitedUsage;
 
-    @FindBy(xpath = "//*[@id='select_option_90']/div[@class='md-text']")
+    @FindBy(xpath = "//*[@id='select_option_91']/div[@class='md-text']")
     WebElement valueOfCommitedUsage;
 
     @FindBy(xpath = "//*[@id='mainForm']/descendant::button[@class='md-raised md-primary cpc-button md-button md-ink-ripple']")
@@ -97,7 +97,7 @@ public class CalculatorPage extends AbstractPage {
     @FindBy(id = "email_quote")
     WebElement emailButton;
 
-    @FindBy(id = "input_404")
+    @FindBy(id = "input_405")
     WebElement fieldForEmail;
 
     @FindBy(xpath = "//*[@aria-label='Send Email']")
