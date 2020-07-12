@@ -15,13 +15,13 @@ public class PageForGenerateEmail extends AbstractPage {
     }
 
     @FindBy(xpath = "//div[@id='copy_address']//span")
-    WebElement buttonForCopyEmail;
+    WebElement copyEmailButton;
 
     @FindBy(xpath = "//span[@class='small_message_icon']")
-    WebElement buttonOpenMail;
+    WebElement openMailButton;
 
     @FindBy(xpath = "//h3[contains(.,'USD')]")
-    WebElement costFromMail;
+    WebElement costFromEmail;
 
     public PageForGenerateEmail openPage() {
         driver.get("https://10minutemail.com");
@@ -29,8 +29,8 @@ public class PageForGenerateEmail extends AbstractPage {
     }
 
     public PageForGenerateEmail copyEmail() {
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(buttonForCopyEmail));
-        buttonForCopyEmail.click();
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(copyEmailButton));
+        copyEmailButton.click();
         return this;
     }
 
@@ -42,14 +42,14 @@ public class PageForGenerateEmail extends AbstractPage {
     }
 
     public PageForGenerateEmail openMail() {
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(buttonOpenMail));
-        buttonOpenMail.click();
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(openMailButton));
+        openMailButton.click();
         return this;
     }
 
     public String getCostFromEmail() {
         new WebDriverWait(driver, 20)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[contains(.,'USD')]")));
-        return costFromMail.getText();
+        return costFromEmail.getText();
     }
 }
